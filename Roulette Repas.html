@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Tirage de Repas</title>
+    <style>
+        body {
+            text-align: center; /* Centre le contenu textuellement */
+            margin: 0; /* Supprime les marges par défaut */
+            padding: 0; /* Supprime les paddings par défaut */
+            background-image: url('image.jpg'); /* Chemin vers votre image */
+            min-height: 100vh; /* Assure que la hauteur minimale est de 100% de la fenêtre */
+            background-size: cover; /* L'image couvre tout l'écran */
+            background-position: center; /* Centre l'image */
+            background-repeat: no-repeat; /* Empêche la répétition de l'image */ 
+            background-attachment: fixed; /* Fixe l'image pour éviter les défilements */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        h1 {
+            font-family: Arial, sans-serif; /* Utilisation d'une police plus moderne */
+            font-size: 50px ;
+            color: beige;
+            background-color: rgba(128, 128, 128, 0.8); /* Fond gris avec transparence */
+            padding: 20px; /* Padding autour du texte */
+            border-radius: 10px; /* Bordures arrondies */
+            display: inline-block; /* Ajuste la taille du conteneur au contenu */
+            margin-top: 20px; /* Espace au-dessus du conteneur */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Ombre portée pour le texte */
+        }   
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px; /* Espacement entre les boutons */
+            margin-top: 20px; /* Espace au-dessus des boutons */
+        }
+        button {
+            background-color: #4CAF50; /* Couleur de fond pour les boutons */
+            color: white; /* Texte blanc pour les boutons */
+            padding: 15px 32px; /* Taille du padding rendant les boutons plus grands */
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px; /* Taille de police pour les boutons */
+            margin: 4px 2px; /* Espace autour des boutons */
+            cursor: pointer; /* Curseur en forme de pointeur */
+            border: none; /* Pas de bordure */
+            border-radius: 10px; /* Bordures arrondies */
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.2); /* Ombre portée pour les boutons */
+            transition: all 0.3s ease; /* Transition pour effet au survol */
+        }
+        button:hover {
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.4); /* Ombre plus intense au survol */
+            transform: scale(1.05); /* Léger agrandissement au survol */
+        }
+        #resultat {
+            font-family: Arial, sans-serif; /* Utilisation d'une police plus moderne */
+            font-size: 30px;
+            color: beige;
+            background-color: rgba(128, 128, 128, 0.8); /* Fond gris avec transparence */
+            padding: 20px; /* Padding autour du texte */
+            border-radius: 10px; /* Bordures arrondies */
+            display: inline-block; /* Ajuste la taille du conteneur au contenu */
+            margin-top: 20px; /* Espace au-dessus du conteneur */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Ombre portée pour le texte */
+            visibility: hidden; /* Rend le résultat invisible initialement */
+            
+        }
+        #resultat.visible {
+            visibility: visible; /* Rend le résultat visible */
+}
+    </style>
+</head>
+<body>
+    <h1>Roulette gourmande</h1>
+    <div class="button-container">
+        <button onclick="tirerRepas('classique')">Repas</button>
+        <button onclick="tirerRepas('rapide')">Repas rapide</button>
+        <button onclick="tirerRepas('doggy')">Doggy bag</button>
+    </div>
+    <p id="resultat"></p>
+    <script>
+        const meals = {
+            classique: ["Poulet rôti", "Ratatouille", "Pizza", " Pâte carbo", "Poulet fêta", "Crêpes mexicaine", "Lasagne", "Crêpes", "Souper froid", "Toast saumon", "salade de pâtes", "Poulet tartare", "Poulet curry", "Pâtes courgettes", "Emincé de poulet sauce brune", "Spatzli", "Purée", "Bolognese", "Pomme de terre sautée", "quiche saumon", "quiche jambon courgette"],
+            rapide: ["Pâtes carbo", "Souper froid", "Toast saumon", "Morceau de viande", "pâtes courgette", "Spatzli"],
+            doggy: ["Poulet tartare", "pâtes courgettes", "Emincé de poulet sauce brune", "Purée", "Bolognese",]
+        };
+
+        function tirerRepas(type) {
+            const repas = meals[type][Math.floor(Math.random() * meals[type].length)];
+            const resultatElement = document.getElementById("resultat");
+            resultatElement.innerText = "Le repas sera : " + repas;
+            resultatElement.classList.add("visible");
+}
+    </script>
+</body>
+</html>
