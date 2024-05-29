@@ -5,85 +5,190 @@
     <title>Tirage de Repas</title>
     <style>
         body {
-            text-align: center; /* Centre le contenu textuellement */
-            margin: 0; /* Supprime les marges par défaut */
-            padding: 0; /* Supprime les paddings par défaut */
-            background-image: url('image.jpg'); /* Chemin vers votre image */
-            min-height: 100vh; /* Assure que la hauteur minimale est de 100% de la fenêtre */
-            background-size: cover; /* L'image couvre tout l'écran */
-            background-position: center; /* Centre l'image */
-            background-repeat: no-repeat; /* Empêche la répétition de l'image */ 
-            background-attachment: fixed; /* Fixe l'image pour éviter les défilements */
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-image: url('image.jpg');
+            min-height: 100vh;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
         }
         h1 {
-            font-family: Arial, sans-serif; /* Utilisation d'une police plus moderne */
-            font-size: 50px ;
+            font-family: Arial, sans-serif;
+            font-size: 50px;
             color: beige;
-            background-color: rgba(128, 128, 128, 0.8); /* Fond gris avec transparence */
-            padding: 20px; /* Padding autour du texte */
-            border-radius: 10px; /* Bordures arrondies */
-            display: inline-block; /* Ajuste la taille du conteneur au contenu */
-            margin-top: 20px; /* Espace au-dessus du conteneur */
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Ombre portée pour le texte */
-        }   
+            background-color: rgba(128, 128, 128, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-top: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
         .button-container {
             display: flex;
             flex-direction: column;
-            gap: 10px; /* Espacement entre les boutons */
-            margin-top: 20px; /* Espace au-dessus des boutons */
+            gap: 10px;
+            margin-top: 20px;
         }
         button {
-            background-color: #4CAF50; /* Couleur de fond pour les boutons */
-            color: white; /* Texte blanc pour les boutons */
-            padding: 15px 32px; /* Taille du padding rendant les boutons plus grands */
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 32px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
-            font-size: 16px; /* Taille de police pour les boutons */
-            margin: 4px 2px; /* Espace autour des boutons */
-            cursor: pointer; /* Curseur en forme de pointeur */
-            border: none; /* Pas de bordure */
-            border-radius: 10px; /* Bordures arrondies */
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.2); /* Ombre portée pour les boutons */
-            transition: all 0.3s ease; /* Transition pour effet au survol */
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
         }
         button:hover {
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.4); /* Ombre plus intense au survol */
-            transform: scale(1.05); /* Léger agrandissement au survol */
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
+            transform: scale(1.05);
         }
         #resultat {
-            font-family: Arial, sans-serif; /* Utilisation d'une police plus moderne */
+            font-family: Arial, sans-serif;
             font-size: 30px;
             color: beige;
-            background-color: rgba(128, 128, 128, 0.8); /* Fond gris avec transparence */
-            padding: 20px; /* Padding autour du texte */
-            border-radius: 10px; /* Bordures arrondies */
-            display: inline-block; /* Ajuste la taille du conteneur au contenu */
-            margin-top: 20px; /* Espace au-dessus du conteneur */
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Ombre portée pour le texte */
-            visibility: hidden; /* Rend le résultat invisible initialement */
-            
+            background-color: rgba(128, 128, 128, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-top: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            visibility: hidden;
         }
         #resultat.visible {
-            visibility: visible; /* Rend le résultat visible */
+            visibility: visible;
+        }
+        /* Style pour les boutons de menu et la fenêtre modale */
+        .menu-button {
+    background-color: #367ab9; /* Couleur de fond pour les boutons */
+    color: white; /* Texte blanc pour les boutons */
+    padding: 15px 32px; /* Taille du padding rendant les boutons plus grands */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px; /* Taille de police pour les boutons */
+    margin: 4px 2px; /* Espace autour des boutons */
+    cursor: pointer; /* Curseur en forme de pointeur */
+    border: none; /* Pas de bordure */
+    border-radius: 10px; /* Bordures arrondies */
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.2); /* Ombre portée pour les boutons */
+    transition: all 0.3s ease; /* Transition pour effet au survol */
 }
+
+.menu-button:hover {
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.4); /* Ombre plus intense au survol */
+    transform: scale(1.05); /* Léger agrandissement au survol */
+}
+
+/* Alignement vertical des boutons de menu */
+.menu-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+        #modal, #modal-category {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 20;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+            text-align: left;
+        }
+        .modal-content h2 {
+            margin-top: 0;
+        }
+        .modal-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+        .modal-buttons button {
+            padding: 10px;
+        }
     </style>
 </head>
 <body>
     <h1>Roulette gourmande</h1>
-    <div class="button-container">
-        <button onclick="tirerRepas('classique')">Repas</button>
-        <button onclick="tirerRepas('rapide')">Repas rapide</button>
-        <button onclick="tirerRepas('doggy')">Doggy bag</button>
+    <div class="button-container" id="categoryButtons">
+        <!-- Les boutons des catégories seront ajoutés ici dynamiquement -->
     </div>
     <p id="resultat"></p>
+    <div class="menu-container">
+        <button class="menu-button" onclick="openCategoryMenu()">Gérer les catégories</button>
+        <button class="menu-button" onclick="openMenu()">Modifier les repas</button>
+    </div>
+
+    <!-- Fenêtre modale pour modifier les repas -->
+    <div id="modal">
+        <div class="modal-content">
+            <h2>Modifier les repas</h2>
+            <label for="typeRepas">Type de repas :</label>
+            <select id="typeRepas">
+                <option value="classique">Classique</option>
+                <option value="rapide">Rapide</option>
+                <option value="doggy">Doggy bag</option>
+            </select>
+            <h3>Ajouter un repas</h3>
+            <input type="text" id="newMeal" placeholder="Nouveau repas">
+            <button onclick="addMeal()">Ajouter</button>
+            <h3>Supprimer un repas</h3>
+            <select id="mealList">
+                <!-- Options ajoutées dynamiquement -->
+            </select>
+            <button onclick="removeMeal()">Supprimer</button>
+            <div class="modal-buttons">
+                <button onclick="closeMenu()">Fermer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fenêtre modale pour gérer les catégories -->
+    <div id="modal-category">
+        <div class="modal-content">
+            <h2>Gérer les catégories</h2>
+            <h3>Ajouter une catégorie</h3>
+            <input type="text" id="newCategory" placeholder="Nouvelle catégorie">
+            <button onclick="addCategory()">Ajouter</button>
+            <h3>Supprimer une catégorie</h3>
+            <select id="categoryList">
+                <!-- Options ajoutées dynamiquement -->
+            </select>
+            <button onclick="removeCategory()">Supprimer</button>
+            <div class="modal-buttons">
+                <button onclick="closeCategoryMenu()">Fermer</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         const meals = {
-            classique: ["Poulet rôti", "Ratatouille", "Pizza", " Pâte carbo", "Poulet fêta", "Crêpes mexicaine", "Lasagne", "Crêpes", "Souper froid", "Toast saumon", "salade de pâtes", "Poulet tartare", "Poulet curry", "Pâtes courgettes", "Emincé de poulet sauce brune", "Spatzli", "Purée", "Bolognese", "Pomme de terre sautée", "quiche saumon", "quiche jambon courgette", "Riz sauté aux légumes", "Croque Monsieur", "Pouet rôti","Poulet Paprika", "pâtes au thon", "filet mignon de porc", "Gratin de Pâtes", "pâtes brocoli", "Poulet Teriyaki", "Pâtes au saumon", "cordon bleu", "Piadine", "Salade", "Saucisse", "Grattin de pomme de terre"],
+            classique: ["Poulet rôti", "Ratatouille", "Pizza", "Pâte carbo", "Poulet fêta", "Crêpes mexicaine", "Lasagne", "Crêpes", "Souper froid", "Toast saumon", "salade de pâtes", "Poulet tartare", "Poulet curry", "Pâtes courgettes", "Emincé de poulet sauce brune", "Spatzli", "Purée", "Bolognese", "Pomme de terre sautée", "quiche saumon", "quiche jambon courgette", "Riz sauté aux légumes", "Croque Monsieur", "Pouet rôti","Poulet Paprika", "pâtes au thon", "filet mignon de porc", "Gratin de Pâtes", "pâtes brocoli", "Poulet Teriyaki", "Pâtes au saumon", "cordon bleu", "Piadine", "Salade", "Saucisse", "Grattin de pomme de terre"],
             rapide: ["Pâtes carbo", "Souper froid", "Toast saumon", "Morceau de viande", "pâtes courgette", "Spatzli", "Riz aux légumes", "Croque-monsieur", "Poulet Paprika", "Pâtes au thon", "Pâtes brocoli", "pâtes au saumon", "Cordon bleu", "piadine", "saucisse", ],
             doggy: ["Poulet tartare", "pâtes courgettes", "Emincé de poulet sauce brune", "Purée", "Bolognese", "Riz au légumes", "Poulet Paprika", "Gratin de pâtes", "Poulet teriyaki", "saucisse" ]
         };
@@ -93,7 +198,120 @@
             const resultatElement = document.getElementById("resultat");
             resultatElement.innerText = "Le repas sera : " + repas;
             resultatElement.classList.add("visible");
-}
+        }
+
+        function openMenu() {
+            document.getElementById('modal').style.display = 'flex';
+            updateMealList();
+        }
+
+        function closeMenu() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        function openCategoryMenu() {
+            document.getElementById('modal-category').style.display = 'flex';
+            updateCategoryList();
+        }
+
+        function closeCategoryMenu() {
+            document.getElementById('modal-category').style.display = 'none';
+        }
+
+        function updateMealList() {
+            const typeRepas = document.getElementById('typeRepas').value;
+            const mealList = document.getElementById('mealList');
+            mealList.innerHTML = '';
+            meals[typeRepas].forEach(meal => {
+                const option = document.createElement('option');
+                option.value = meal;
+                option.text = meal;
+                mealList.add(option);
+            });
+        }
+
+        function updateCategoryList() {
+            const categoryList = document.getElementById('categoryList');
+            categoryList.innerHTML = '';
+            for (let category in meals) {
+                const option = document.createElement('option');
+                option.value = category;
+                option.text = category;
+                categoryList.add(option);
+            }
+        }
+
+        document.getElementById('typeRepas').addEventListener('change', updateMealList);
+
+        function addMeal() {
+            const typeRepas = document.getElementById('typeRepas').value;
+            const newMeal = document.getElementById('newMeal').value.trim();
+            if (newMeal && !meals[typeRepas].includes(newMeal)) {
+                meals[typeRepas].push(newMeal);
+                updateMealList();
+                document.getElementById('newMeal').value = '';
+            }
+        }
+
+        function removeMeal() {
+            const typeRepas = document.getElementById('typeRepas').value;
+            const mealList = document.getElementById('mealList');
+            const selectedMeal = mealList.value;
+            if (selectedMeal) {
+                meals[typeRepas] = meals[typeRepas].filter(meal => meal !== selectedMeal);
+                updateMealList();
+            }
+        }
+
+        function addCategory() {
+            const newCategory = document.getElementById('newCategory').value.trim();
+            if (newCategory && !meals[newCategory]) {
+                meals[newCategory] = [];
+                const typeRepasSelect = document.getElementById('typeRepas');
+                const option = document.createElement('option');
+                option.value = newCategory;
+                option.text = newCategory;
+                typeRepasSelect.add(option);
+                updateCategoryList();
+                updateCategoryButtons();
+                document.getElementById('newCategory').value = '';
+            }
+        }
+
+        function removeCategory() {
+            const categoryList = document.getElementById('categoryList');
+            const selectedCategory = categoryList.value;
+            if (selectedCategory && meals[selectedCategory]) {
+                delete meals[selectedCategory];
+                const typeRepasSelect = document.getElementById('typeRepas');
+                const options = Array.from(typeRepasSelect.options);
+                options.forEach(option => {
+                    if (option.value === selectedCategory) {
+                        typeRepasSelect.removeChild(option);
+                    }
+                });
+                updateCategoryList();
+                updateCategoryButtons();
+                updateMealList(); // Mise à jour pour afficher la nouvelle liste
+            }
+        }
+
+        function updateCategoryButtons() {
+            const categoryButtons = document.getElementById('categoryButtons');
+            categoryButtons.innerHTML = '';
+            for (let category in meals) {
+                const button = document.createElement('button');
+                button.innerText = category.charAt(0).toUpperCase() + category.slice(1);
+                button.onclick = () => tirerRepas(category);
+                categoryButtons.appendChild(button);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateMealList();
+            updateCategoryList();
+            updateCategoryButtons();
+        });
     </script>
 </body>
 </html>
