@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Tirage de Repas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
             text-align: center;
@@ -18,9 +19,9 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
+            font-family: 'Roboto', sans-serif;
         }
         h1 {
-            font-family: Arial, sans-serif;
             font-size: 50px;
             color: beige;
             background-color: rgba(128, 128, 128, 0.8);
@@ -37,7 +38,7 @@
             margin-top: 20px;
         }
         button {
-            background-color: #4CAF50;
+            background: linear-gradient(45deg, #4CAF50, #2E7D32);
             color: white;
             padding: 15px 32px;
             text-align: center;
@@ -56,7 +57,6 @@
             transform: scale(1.05);
         }
         #resultat {
-            font-family: Arial, sans-serif;
             font-size: 30px;
             color: beige;
             background-color: rgba(128, 128, 128, 0.8);
@@ -70,67 +70,103 @@
         #resultat.visible {
             visibility: visible;
         }
-        /* Style pour les boutons de menu et la fenêtre modale */
         .menu-button {
-    background-color: #367ab9; /* Couleur de fond pour les boutons */
-    color: white; /* Texte blanc pour les boutons */
-    padding: 15px 32px; /* Taille du padding rendant les boutons plus grands */
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px; /* Taille de police pour les boutons */
-    margin: 4px 2px; /* Espace autour des boutons */
-    cursor: pointer; /* Curseur en forme de pointeur */
-    border: none; /* Pas de bordure */
-    border-radius: 10px; /* Bordures arrondies */
-    box-shadow: 5px 5px 15px rgba(0,0,0,0.2); /* Ombre portée pour les boutons */
-    transition: all 0.3s ease; /* Transition pour effet au survol */
-}
-
-.menu-button:hover {
-    box-shadow: 5px 5px 15px rgba(0,0,0,0.4); /* Ombre plus intense au survol */
-    transform: scale(1.05); /* Léger agrandissement au survol */
-}
-
-/* Alignement vertical des boutons de menu */
-.menu-container {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-        #modal, #modal-category {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-            z-index: 20;
-        }
-        .modal-content {
-            background-color: white;
-            padding: 20px;
+            background: linear-gradient(45deg, #367ab9, #1E4E8A);
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border: none;
             border-radius: 10px;
-            width: 80%;
-            max-width: 500px;
-            text-align: left;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
         }
-        .modal-content h2 {
-            margin-top: 0;
+        .menu-button:hover {
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
+            transform: scale(1.05);
         }
-        .modal-buttons {
+        .menu-container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            gap: 10px;
         }
-        .modal-buttons button {
-            padding: 10px;
-        }
+        #modal, #modal-category {
+    display: none; /* Cache les fenêtres modales par défaut */
+    position: fixed; /* Positionne les fenêtres modales de manière fixe par rapport à la fenêtre du navigateur */
+    top: 0; /* Place les fenêtres modales en haut de la fenêtre du navigateur */
+    left: 0; /* Place les fenêtres modales à gauche de la fenêtre du navigateur */
+    width: 100%; /* Les fenêtres modales occupent toute la largeur de la fenêtre du navigateur */
+    height: 100%; /* Les fenêtres modales occupent toute la hauteur de la fenêtre du navigateur */
+    background-color: rgba(68, 118, 177, 0.5); /* Applique une couleur de fond noire semi-transparente pour l'effet d'arrière-plan sombre */
+    justify-content: center; /* Centre horizontalement le contenu des fenêtres modales */
+    align-items: center; /* Centre verticalement le contenu des fenêtres modales */
+    z-index: 20; /* Définit un niveau de superposition élevé pour que les fenêtres modales apparaissent au-dessus des autres éléments */
+    opacity: 0; /* Rend les fenêtres modales complètement transparentes par défaut */
+    transition: opacity 0.3s ease; /* Ajoute une transition en douceur pour l'opacité lors de l'apparition et de la disparition */
+}
+#modal.visible, #modal-category.visible {
+    display: flex; /* Change l'affichage en flexbox pour permettre l'alignement centré du contenu */
+    opacity: 1; /* Rend les fenêtres modales complètement opaques lorsque la classe 'visible' est ajoutée */
+}
+
+.modal-content {
+    background-color: #c7c555; /* Définit une couleur de fond blanche pour le contenu de la modale */
+    padding: 20px; /* Ajoute un espace intérieur de 20 pixels autour du contenu de la modale */
+    border-radius: 10px; /* Arrondit les coins de la modale avec un rayon de 10 pixels */
+    width: 50%; /* La modale occupe 80% de la largeur de la fenêtre du navigateur */
+    max-width: 500px; /* Limite la largeur maximale de la modale à 500 pixels */
+    text-align: left; /* Aligne le texte à gauche à l'intérieur de la modale */
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.2); /* Ajoute une ombre portée autour de la modale pour un effet de profondeur */
+    transition: transform 0.3s ease; /* Ajoute une transition en douceur pour les transformations (non utilisée dans ce cas) */
+    background-image: url('background-pattern.jpg'); /* Ajoute une image de fond esthétique */
+    background-size: cover; /* Ajuste la taille de l'image de fond pour couvrir toute la modale */
+    background-position: center; /* Centre l'image de fond dans la modale */
+    color: #333; /* Définit la couleur du texte à un gris foncé */
+}
+
+.modal-content h2, .modal-content h3, .modal-content label {
+    font-family: 'Roboto', sans-serif; /* Applique la police 'Roboto' aux titres et étiquettes dans la modale */
+    color: #333; /* Définit la couleur du texte à un gris foncé */
+}
+
+.modal-content input[type="text"], .modal-content select {
+    width: 60%; /* Les champs de texte et les sélecteurs occupent 60% de la largeur de leur conteneur */
+    padding: 10px; /* Ajoute un espace intérieur de 10 pixels */
+    margin: 10px 0; /* Ajoute une marge verticale de 10 pixels */
+    border: 1px solid #ccc; /* Ajoute une bordure grise claire */
+    border-radius: 5px; /* Arrondit les coins des champs de texte et sélecteurs avec un rayon de 5 pixels */
+    font-size: 16px; /* Définit la taille de la police à 16 pixels */
+}
+
+.modal-content button {
+    width: 60%; /* Les boutons occupent 60% de la largeur de leur conteneur */
+    background: linear-gradient(45deg, #4CAF50, #2E7D32); /* Ajoute un dégradé de vert comme couleur de fond des boutons */
+    color: white; /* Définit la couleur du texte des boutons à blanc */
+    padding: 10px; /* Ajoute un espace intérieur de 10 pixels */
+    border: none; /* Supprime les bordures par défaut des boutons */
+    border-radius: 5px; /* Arrondit les coins des boutons avec un rayon de 5 pixels */
+    cursor: pointer; /* Change le curseur en main lorsqu'on survole les boutons */
+    font-size: 16px; /* Définit la taille de la police à 16 pixels */
+    transition: all 0.3s ease; /* Ajoute une transition en douceur pour toutes les propriétés modifiées */
+}
+
+.modal-content button:hover {
+    background: linear-gradient(45deg, #45A049, #2E7D32); /* Change le dégradé de fond des boutons lorsqu'on les survole */
+}
+
+.modal-buttons {
+    display: flex; /* Utilise le modèle flexbox pour aligner les boutons */
+    justify-content: space-between; /* Espace les boutons également */
+    gap: 10px; /* Ajoute un espacement de 10 pixels entre les boutons */
+}
+
     </style>
 </head>
 <body>
@@ -148,7 +184,7 @@
     <div id="modal">
         <div class="modal-content">
             <h2>Modifier les repas</h2>
-            <label for="typeRepas">Type de repas :</label>
+            <label for="typeRepas">Type de repas :</label><br>
             <select id="typeRepas">
                 <option value="classique">Classique</option>
                 <option value="rapide">Rapide</option>
@@ -201,21 +237,21 @@
         }
 
         function openMenu() {
-            document.getElementById('modal').style.display = 'flex';
+            document.getElementById('modal').classList.add('visible');
             updateMealList();
         }
 
         function closeMenu() {
-            document.getElementById('modal').style.display = 'none';
+            document.getElementById('modal').classList.remove('visible');
         }
 
         function openCategoryMenu() {
-            document.getElementById('modal-category').style.display = 'flex';
+            document.getElementById('modal-category').classList.add('visible');
             updateCategoryList();
         }
 
         function closeCategoryMenu() {
-            document.getElementById('modal-category').style.display = 'none';
+            document.getElementById('modal-category').classList.remove('visible');
         }
 
         function updateMealList() {
@@ -292,7 +328,7 @@
                 });
                 updateCategoryList();
                 updateCategoryButtons();
-                updateMealList(); // Mise à jour pour afficher la nouvelle liste
+                updateMealList();
             }
         }
 
@@ -313,5 +349,4 @@
             updateCategoryButtons();
         });
     </script>
-</body>
-</html>
+</body
